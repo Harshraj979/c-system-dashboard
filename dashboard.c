@@ -54,6 +54,8 @@ void InitCPU(void) {
     lastUserTime.HighPart = userTime.dwHighDateTime;
 }
 
+// Calculates global CPU usage percentage by comparing system times
+// between two intervals. Returns value between 0.0 and 100.0.
 static double GetCPUUsage(void) {
     FILETIME idleTime, kernelTime, userTime;
     if (!GetSystemTimes(&idleTime, &kernelTime, &userTime)) return 0.0;
@@ -74,6 +76,7 @@ static double GetCPUUsage(void) {
     return (double)(total - idleDiff) * 100.0 / (double)total;
 }
 
+// Retrieves global memory usage percentage via GlobalMemoryStatusEx.
 static double GetMemoryUsage(void) {
     MEMORYSTATUSEX statex;
     memset(&statex, 0, sizeof(statex));
