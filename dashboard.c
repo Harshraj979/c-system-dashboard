@@ -26,6 +26,12 @@
 
 #define HISTORY_SIZE 60
 
+// Color Constants
+#define COLOR_GRAPH_BG     RGB(20, 20, 20)
+#define COLOR_GRAPH_GRID   RGB(60, 60, 60)
+#define COLOR_CPU_LINE     RGB(0, 200, 0)
+#define COLOR_MEM_LINE     RGB(0, 150, 255)
+
 // Globals
 HINSTANCE hInst;
 HWND hMainWnd, hListView, hBtnKill;
@@ -160,12 +166,12 @@ static void KillSelectedProcess(void) {
 
 static void DrawGraph(HDC hdc, RECT rect, double* history, int historyIdx, COLORREF color, const char* label) {
     // Background
-    HBRUSH hBrushBg = CreateSolidBrush(RGB(20, 20, 20));
+    HBRUSH hBrushBg = CreateSolidBrush(COLOR_GRAPH_BG);
     FillRect(hdc, &rect, hBrushBg);
     DeleteObject(hBrushBg);
 
     // Grid
-    HPEN hPenGrid = CreatePen(PS_DOT, 1, RGB(60, 60, 60));
+    HPEN hPenGrid = CreatePen(PS_DOT, 1, COLOR_GRAPH_GRID);
     HPEN hOldPen = (HPEN)SelectObject(hdc, hPenGrid);
     for (int i = 0; i < 4; ++i) {
         int y = rect.top + i * (rect.bottom - rect.top) / 4;
@@ -302,8 +308,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
         RECT rcCPU = {rcGraph.left, rcGraph.top, rcGraph.right/2, rcGraph.bottom};
         RECT rcMem = {rcGraph.right/2, rcGraph.top, rcGraph.right, rcGraph.bottom};
 
-        DrawGraph(hdcMem, rcCPU, cpuHistory, historyMsgIndex, RGB(0,200,0), "CPU Usage");
-        DrawGraph(hdcMem, rcMem, memHistory, historyMsgIndex, RGB(0,150,255), "Memory Usage");
+        DrawGraph(hdcMem, rcCPU, cpuHistory, historyMsgIndex, COLOR_CPU_LINE, "CPU Usage");
+        DrawGraph(hdcMem, rcMem, memHistory, historyMsgIndex, COLOR_MEM_LINE, "Memory Usage");
 
         BitBlt(hdc, 0, 0, rcGraph.right, rcGraph.bottom, hdcMem, 0, 0, SRCCOPY);
 
