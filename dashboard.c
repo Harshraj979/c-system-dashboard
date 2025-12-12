@@ -161,7 +161,10 @@ static void KillSelectedProcess(void) {
         CloseHandle(hProcess);
         UpdateProcessList();
     } else {
-        MessageBox(hMainWnd, "Failed to terminate process (permission?).", "Error", MB_OK | MB_ICONERROR);
+        DWORD errCode = GetLastError();
+        char msgBuf[128];
+        snprintf(msgBuf, sizeof(msgBuf), "Failed to terminate process. Error code: %lu", errCode);
+        MessageBox(hMainWnd, msgBuf, "Error", MB_OK | MB_ICONERROR);
     }
 }
 
