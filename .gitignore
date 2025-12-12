@@ -1,0 +1,5 @@
+*.exe
+*.o
+build_log.txt
+build_error.txt
+.vscode/
