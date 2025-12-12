@@ -19,6 +19,7 @@
 #define ID_LISTVIEW 1001
 #define ID_BTN_KILL 1002
 #define TIMER_ID 1
+#define REFRESH_RATE_MS 1000
 
 #ifndef LVS_EX_DOUBLEBUFFER
 #define LVS_EX_DOUBLEBUFFER 0x00010000
@@ -252,7 +253,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
             10, rcClient.bottom - 35, 120, 30,
             hWnd, (HMENU)ID_BTN_KILL, hInst, NULL);
 
-        SetTimer(hWnd, TIMER_ID, 1000, NULL);
+        SetTimer(hWnd, TIMER_ID, REFRESH_RATE_MS, NULL);
         UpdateProcessList();
         break;
     }
