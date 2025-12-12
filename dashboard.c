@@ -368,7 +368,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return 1;
     }
 
-    hMainWnd = CreateWindowA("SysDashClass", "System Dashboard C",
+    hMainWnd = CreateWindowA("SysDashClass", "System Dashboard v1.0",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 900, 600,
         NULL, NULL, hInstance, NULL);
