@@ -1,8 +1,3 @@
-/* SysDashboard_fixed.c
- * Improved, portable Win32 system dashboard (process list + CPU/memory graphs)
- * Build with: gcc dashboard.c -o dashboard.exe -lcomctl32 -lpsapi -lgdi32 -luser32
- * Works best with MinGW-w64.
- */
 
 #define _WIN32_IE 0x0600
 #define _WIN32_WINNT 0x0600
